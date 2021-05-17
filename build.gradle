@@ -5,6 +5,8 @@ buildscript {
         version_navigation = "2.3.5"
         recyclerviewVersion = "1.2.0"
         glideVersion = "4.12.0"
+        retrofitVersion = "2.9.0"
+        interceptorVersion = "4.9.1"
     }
 
     repositories {
