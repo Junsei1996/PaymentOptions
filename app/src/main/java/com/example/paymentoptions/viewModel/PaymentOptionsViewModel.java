@@ -27,6 +27,8 @@ public class PaymentOptionsViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         options.postValue(response.body());
+                    } else {
+                        failure("Failed to get Data!");
                     }
                 } else {
                     failure(response.message());

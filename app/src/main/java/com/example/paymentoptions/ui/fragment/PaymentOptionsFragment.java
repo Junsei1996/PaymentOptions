@@ -1,5 +1,6 @@
 package com.example.paymentoptions.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.paymentoptions.R;
 import com.example.paymentoptions.adapter.PaymentOptionsAdapter;
 import com.example.paymentoptions.databinding.FragmentPaymentOptionsBinding;
 import com.example.paymentoptions.model.PaymentOptions;
+import com.example.paymentoptions.utils.ErrorDialog;
 import com.example.paymentoptions.viewModel.PaymentOptionsViewModel;
 
 public class PaymentOptionsFragment extends Fragment {
@@ -25,6 +27,7 @@ public class PaymentOptionsFragment extends Fragment {
     FragmentPaymentOptionsBinding binding;
     PaymentOptionsViewModel mViewModel;
     PaymentOptionsAdapter adapter;
+    ProgressDialog loader;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +48,8 @@ public class PaymentOptionsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         adapter = new PaymentOptionsAdapter();
-
+        loader = ProgressDialog.show(getContext(), "",
+                "Loading. Please wait...", true);
         binding.rvPaymentOptions.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvPaymentOptions.setAdapter(adapter);
 
@@ -56,6 +60,7 @@ public class PaymentOptionsFragment extends Fragment {
 
     private void makeNetworkCall() {
         //show loader before
+        showLoader();
         mViewModel.getPaymentData();
     }
 
@@ -65,6 +70,7 @@ public class PaymentOptionsFragment extends Fragment {
             @Override
             public void onChanged(PaymentOptions paymentOptions) {
                 //hide loader
+                hideLoader();
                 setDatatoAdapter(paymentOptions);
             }
         });
@@ -73,6 +79,8 @@ public class PaymentOptionsFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 //hide loader
+                hideLoader();
+                showEmptyState();
                 showErrorDialog(s);
 
             }
@@ -82,12 +90,38 @@ public class PaymentOptionsFragment extends Fragment {
 
     private void setDatatoAdapter(PaymentOptions paymentOptions) {
 
-        adapter.setData(paymentOptions.getNetworks());
+        if (paymentOptions.getNetworks().getApplicable().isEmpty()) {
+            showEmptyState();
+        } else {
+            adapter.setData(paymentOptions.getNetworks());
+        }
 
     }
 
     private void showErrorDialog(String s) {
+        ErrorDialog errorDialog = new ErrorDialog(getContext(), s);
+        errorDialog.setCancelable(true);
+        errorDialog.show();
+    }
 
+
+    void showEmptyState() {
+        binding.rvPaymentOptions.setVisibility(View.GONE);
+        binding.emptyState.setVisibility(View.VISIBLE);
+    }
+
+    void hideEmptyState() {
+        binding.rvPaymentOptions.setVisibility(View.VISIBLE);
+        binding.emptyState.setVisibility(View.GONE);
+    }
+
+
+    void showLoader() {
+        loader.show();
+    }
+
+    void hideLoader() {
+        loader.dismiss();
     }
 
 }

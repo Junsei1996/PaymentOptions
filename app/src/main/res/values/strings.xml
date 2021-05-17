@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">PaymentOptions</string>
     <string name="payment_methods">Payment Methods</string>
+    <string name="error">ERROR</string>
+    <string name="empty_state">Sorry! Looks like something went wrong!</string>
 </resources>
