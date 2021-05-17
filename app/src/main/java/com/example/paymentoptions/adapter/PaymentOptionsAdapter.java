@@ -2,29 +2,41 @@ package com.example.paymentoptions.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.paymentoptions.databinding.ItemPaymentOptionBinding;
+import com.example.paymentoptions.model.ApplicableItem;
+import com.example.paymentoptions.model.Networks;
+
+import java.util.ArrayList;
 
 public class PaymentOptionsAdapter extends RecyclerView.Adapter<PaymentOptionsAdapter.PaymentOptionsViewHolder> {
+
+    ArrayList<ApplicableItem> data = new ArrayList<>();
 
     @NonNull
     @Override
     public PaymentOptionsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemPaymentOptionBinding b = ItemPaymentOptionBinding.inflate(LayoutInflater.from(parent.getContext()));
+        ItemPaymentOptionBinding b = ItemPaymentOptionBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
         return new PaymentOptionsViewHolder(b);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PaymentOptionsViewHolder holder, int position) {
-
-        holder.setData();
-
+        holder.setData(data.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return data.size();
+    }
+
+    public void setData(Networks networks) {
+        data.clear();
+        data.addAll(networks.getApplicable());
+        notifyDataSetChanged();
     }
 
     class PaymentOptionsViewHolder extends RecyclerView.ViewHolder {
@@ -36,11 +48,9 @@ public class PaymentOptionsAdapter extends RecyclerView.Adapter<PaymentOptionsAd
             this.mBinding = binding;
         }
 
-        void setData() {
+        void setData(ApplicableItem item) {
 
-            mBinding.setImage("https://picsum.photos/id/237/200/300");
-            mBinding.setTitle("Dummy");
-            mBinding.setType("Dummy");
+            mBinding.setItem(item);
 
         }
 

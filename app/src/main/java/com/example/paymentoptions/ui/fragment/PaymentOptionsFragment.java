@@ -24,6 +24,7 @@ public class PaymentOptionsFragment extends Fragment {
 
     FragmentPaymentOptionsBinding binding;
     PaymentOptionsViewModel mViewModel;
+    PaymentOptionsAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,8 +44,10 @@ public class PaymentOptionsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        adapter = new PaymentOptionsAdapter();
+
         binding.rvPaymentOptions.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvPaymentOptions.setAdapter(new PaymentOptionsAdapter());
+        binding.rvPaymentOptions.setAdapter(adapter);
 
         observe();
         makeNetworkCall();
@@ -62,6 +65,7 @@ public class PaymentOptionsFragment extends Fragment {
             @Override
             public void onChanged(PaymentOptions paymentOptions) {
                 //hide loader
+                setDatatoAdapter(paymentOptions);
             }
         });
 
@@ -73,6 +77,12 @@ public class PaymentOptionsFragment extends Fragment {
 
             }
         });
+
+    }
+
+    private void setDatatoAdapter(PaymentOptions paymentOptions) {
+
+        adapter.setData(paymentOptions.getNetworks());
 
     }
 

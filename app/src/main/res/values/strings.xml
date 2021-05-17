@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PaymentOptions</string>
+    <string name="payment_methods">Payment Methods</string>
 </resources>
