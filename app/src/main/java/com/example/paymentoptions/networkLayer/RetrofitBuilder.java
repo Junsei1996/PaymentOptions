@@ -9,9 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitBuilder {
 
-    public static Retrofit retrofit;
+    private static Retrofit retrofit;
 
-    Retrofit getRetrofit() {
+    private Retrofit getRetrofit() {
 
         if (retrofit == null) {
 
@@ -30,7 +30,7 @@ public class RetrofitBuilder {
         return retrofit;
     }
 
-    RetrofitApi getRetrofitService() {
+    public RetrofitApi getRetrofitService() {
         return getRetrofit().create(RetrofitApi.class);
     }
 

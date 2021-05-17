@@ -59,5 +59,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${interceptorVersion}"
 
+    //LifeCycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}"
+
 
 }

@@ -10,20 +10,25 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.paymentoptions.R;
 import com.example.paymentoptions.adapter.PaymentOptionsAdapter;
 import com.example.paymentoptions.databinding.FragmentPaymentOptionsBinding;
+import com.example.paymentoptions.model.PaymentOptions;
+import com.example.paymentoptions.viewModel.PaymentOptionsViewModel;
 
 public class PaymentOptionsFragment extends Fragment {
 
     FragmentPaymentOptionsBinding binding;
+    PaymentOptionsViewModel mViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(PaymentOptionsViewModel.class);
     }
 
     @Nullable
@@ -40,6 +45,38 @@ public class PaymentOptionsFragment extends Fragment {
 
         binding.rvPaymentOptions.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvPaymentOptions.setAdapter(new PaymentOptionsAdapter());
+
+        observe();
+        makeNetworkCall();
+
+    }
+
+    private void makeNetworkCall() {
+        //show loader before
+        mViewModel.getPaymentData();
+    }
+
+    private void observe() {
+
+        mViewModel.getOptions().observe(getViewLifecycleOwner(), new Observer<PaymentOptions>() {
+            @Override
+            public void onChanged(PaymentOptions paymentOptions) {
+                //hide loader
+            }
+        });
+
+        mViewModel.onError().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                //hide loader
+                showErrorDialog(s);
+
+            }
+        });
+
+    }
+
+    private void showErrorDialog(String s) {
 
     }
 
