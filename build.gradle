@@ -3,6 +3,8 @@ buildscript {
 
     ext {
         version_navigation = "2.3.5"
+        recyclerviewVersion = "1.2.0"
+        glideVersion = "4.12.0"
     }
 
     repositories {
