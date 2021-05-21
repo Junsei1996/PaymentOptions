@@ -4,12 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/twelve_dp">
 
     <ImageView
         android:id="@+id/iv_error"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/hundred_dp"
+        android:layout_height="@dimen/hundred_dp"
         android:src="@drawable/svg_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,11 +19,11 @@
         android:id="@+id/tv_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/twelve_dp"
         android:fontFamily="@font/sourcesanspro_bold"
         android:text="@string/error"
         android:textColor="@color/red"
-        android:textSize="26sp"
+        android:textSize="@dimen/twentysix_sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_error" />
@@ -35,7 +35,7 @@
         android:fontFamily="@font/sourcesanspro_regular"
         android:text="@string/error"
         android:textColor="@color/red"
-        android:textSize="18sp"
+        android:textSize="@dimen/eighteen_sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_error" />

@@ -15,20 +15,20 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
+        android:layout_margin="@dimen/ten_dp"
+        app:cardCornerRadius="@dimen/fifteen_dp"
+        app:cardElevation="@dimen/five_dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:padding="@dimen/five_dp">
 
             <ImageView
                 android:id="@+id/iv_logo"
                 ImageLink="@{item.links.logo}"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/sixty_dp"
+                android:layout_height="@dimen/sixty_dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,13 +40,13 @@
                 label="@{item.label}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/sourcesanppro_semibold"
-                android:textColor="#000"
-                android:textSize="20sp"
                 android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="@dimen/twenty_sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_type"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_logo"
@@ -58,13 +58,13 @@
                 android:id="@+id/tv_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/sourcesanspro_it"
-                android:text="@{item.grouping}"
-                android:textSize="12sp"
                 android:singleLine="true"
+                android:text="@{item.grouping}"
+                android:textSize="@dimen/twelve_sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_logo"
